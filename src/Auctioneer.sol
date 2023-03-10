@@ -25,23 +25,65 @@ contract Auctioneer {
 
     event Bid(address indexed bidder, uint256 amount);
 
-    error BidPeriodNotOver();
-    error RevealPeriodNotOver();
+    /// @dev Emits when an action inteded to be made during the bid period is made outside it.
+    error NotBidPeriod();
+    /// @dev Emits when an action intended to be made during hte reveal period is made outside it.
+    error NotRevealPeriod();
+    /// @dev Emits when the bid period duration is zero on the constructor.
     error ZeroBidTime();
-    error ZeroReavealTime();
+    /// @dev Emits when the reveal period duration is zero on the constructor.
+    error ZeroRevealTime();
+
+    modifier onlyBid() {
+        // TODO: Double check bound math
+        if (block.timestamp > auctionStartTime + bidPeriodDuration || block.timestamp < auctionStartTime) {
+            revert NotBidPeriod();
+        }
+        _;
+    }
+
+    modifier onlyReveal() {
+        // TODO: Double check bound math
+        if (
+            // Reveal attempt after auction ends
+            block.timestamp > auctionStartTime + bidPeriodDuration + revealPeriodDuration
+            // Reveal attempt before bid period ends
+                || block.timestamp < auctionStartTime + bidPeriodDuration
+        ) {
+            revert NotRevealPeriod();
+        }
+        _;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                             CONSTRUCTOR
+    //////////////////////////////////////////////////////////////*/
 
     constructor(uint256 _bidPeriodDuration, uint256 _revealPeriodDuration) {
         if (_bidPeriodDuration == 0) revert ZeroBidTime();
-        if (_revealPeriodDuration == 0) revert ZeroReavealTime();
+        if (_revealPeriodDuration == 0) revert ZeroRevealTime();
         bidPeriodDuration = _bidPeriodDuration;
         revealPeriodDuration = _revealPeriodDuration;
     }
 
+    /*//////////////////////////////////////////////////////////////
+                          EXTERNAL FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
+
     function bid() external payable {
-        require(
-            block.timestamp < bidPeriodDuration,
-            "Auctioneer: bid period is over"
-        );
+        require(block.timestamp < bidPeriodDuration, "Auctioneer: bid period is over");
         emit Bid(msg.sender, msg.value);
     }
+
+    function reveal() external {}
+
+    function withdraw() external {}
+
+    /*//////////////////////////////////////////////////////////////
+                        NATIVE TOKEN HANDLING
+    //////////////////////////////////////////////////////////////*/
+
+    fallback() external payable {}
+
+    receive() external payable {}
 }
