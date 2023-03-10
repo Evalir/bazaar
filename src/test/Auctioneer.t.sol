@@ -10,9 +10,7 @@ contract GreeterTest is Test {
 
     Auctioneer auctioneer;
 
-    event GMEverybodyGM();
-
     function setUp() external {
-        auctioneer = new Auctioneer();
+        auctioneer = new Auctioneer(0, 0);
     }
 }

@@ -7,7 +7,7 @@ import {Auctioneer} from "src/Auctioneer.sol";
 contract Deploy is Script {
     function run() external returns (Auctioneer auctioneer) {
         vm.startBroadcast();
-        auctioneer = new Auctioneer();
+        auctioneer = new Auctioneer(0, 0);
         vm.stopBroadcast();
     }
 }
