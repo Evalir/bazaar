@@ -1,6 +1,6 @@
 <img align="right" width="150" height="150" top="100" src="./public/readme.jpg">
 
-# femplate • [![tests](https://github.com/refcell/femplate/actions/workflows/ci.yml/badge.svg?label=tests)](https://github.com/refcell/femplate/actions/workflows/ci.yml) ![license](https://img.shields.io/github/license/refcell/femplate?label=license) ![solidity](https://img.shields.io/badge/solidity-^0.8.17-lightgrey)
+# bazaar • [![tests](https://github.com/evalir/bazaar/actions/workflows/ci.yml/badge.svg?label=tests)](https://github.com/evalir/bazaar/actions/workflows/ci.yml) ![license](https://img.shields.io/github/license/evalir/bazaar?label=license) ![solidity](https://img.shields.io/badge/solidity-^0.8.17-lightgrey)
 
 A **Clean**, **Robust** Template for Foundry Projects.
 
@@ -43,7 +43,7 @@ test
 
 ### Notable Mentions
 
-- [femplate](https://github.com/refcell/femplate)
+- [bazaar](https://github.com/evalir/bazaar)
 - [foundry](https://github.com/foundry-rs/foundry)
 - [solmate](https://github.com/Rari-Capital/solmate)
 - [forge-std](https://github.com/brockelmore/forge-std)
