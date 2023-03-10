@@ -11,6 +11,6 @@ contract GreeterTest is Test {
     Auctioneer auctioneer;
 
     function setUp() external {
-        auctioneer = new Auctioneer(0, 0);
+        auctioneer = new Auctioneer(0, 0, address(0), address(0));
     }
 }
